@@ -1,4 +1,4 @@
-package com.quehacerenzaragoza.soydezaragoza
+package com.quehacerenzaragoza.soydezaragoza.app
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.quehacerenzaragoza.soydezaragoza.Greeting
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
