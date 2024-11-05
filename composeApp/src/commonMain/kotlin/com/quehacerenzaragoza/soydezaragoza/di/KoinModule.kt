@@ -1,5 +1,6 @@
 package com.quehacerenzaragoza.soydezaragoza.di
 
+import com.quehacerenzaragoza.soydezaragoza.util.extensions.BASE_URL
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation

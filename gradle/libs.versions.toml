@@ -19,7 +19,7 @@ koinCompose = "4.0.0"
 ktor-client = "3.0.0"
 kotlinxSerialization = "1.7.3"
 voyagerVersion = "1.0.0"
-coil3 = "3.0.0-rc02"
+coil3 = "3.0.0-alpha08"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
