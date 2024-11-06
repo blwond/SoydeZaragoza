@@ -20,86 +20,49 @@ class RemoteDataSourceImplementation(
     private val httpClient: HttpClient
 ) : RemoteDataSource() {
 
-    override suspend fun getPostsByCategories(): NetworkResult<List<Post>> {
+    private suspend inline fun <reified T> getRequest(endpoint: String, params: Map<String, Any>? = null): NetworkResult<T> {
         return try {
-            val response = httpClient.get("$BASE_URL_API$POSTS_END_POINT") {
+            val response = httpClient.get("$BASE_URL_API$endpoint") {
                 headers {
                     append(HttpHeaders.Authorization, "Basic $AUTH_KEY_SOYDEZARAGOZA")
                 }
-                parameter("categories", 1)
-                parameter("page", 1)
-                parameter("per_page", 10)
-                parameter("_embed", true)
+                params?.forEach { (key, value) -> parameter(key, value) }
             }
 
             if (response.status == HttpStatusCode.OK) {
-                val posts = response.body<List<Post>>()
-                NetworkResult.Success(posts)
+                val body = response.body<T>()
+                NetworkResult.Success(body)
             } else {
-                NetworkResult.Error(null, "Error fetching posts: ${response.status}")
+                NetworkResult.Error(null, "Error fetching data: ${response.status}")
             }
         } catch (e: Exception) {
             NetworkResult.Error(null, e.message ?: "Unknown error")
         }
+    }
+
+    override suspend fun getPostsByCategories(): NetworkResult<List<Post>> {
+        val params = mapOf(
+            "categories" to 1,   // Modifica esta línea para obtener otras categorías si lo necesitas
+            "page" to 1,
+            "per_page" to 10,
+            "_embed" to true
+        )
+        return getRequest(POSTS_END_POINT, params)
     }
 
     override suspend fun getCategories(): NetworkResult<List<Categories>> {
-        return try {
-            val response = httpClient.get("$BASE_URL_API$CATEGORIES_END_POINT") {
-                headers {
-                    append(HttpHeaders.Authorization, "Basic $AUTH_KEY_SOYDEZARAGOZA")
-                }
-                parameter("per_page", 50)
-            }
-
-            if (response.status == HttpStatusCode.OK) {
-                val categories = response.body<List<Categories>>()
-                NetworkResult.Success(categories)
-            } else {
-                NetworkResult.Error(null, "Error fetching categories: ${response.status}")
-            }
-        } catch (e: Exception) {
-            NetworkResult.Error(null, e.message ?: "Unknown error")
-        }
+        val params = mapOf("per_page" to 50)
+        return getRequest(CATEGORIES_END_POINT, params)
     }
 
     override suspend fun getPostById(postId: Int): NetworkResult<Post> {
-        return try {
-            val response = httpClient.get("$BASE_URL_API$POSTS_END_POINT/$postId?&_embed=tru") {
-                headers {
-                    append(HttpHeaders.Authorization, "Basic $AUTH_KEY_SOYDEZARAGOZA")
-                }
-                parameter("_embed", true)
-            }
-
-            if (response.status == HttpStatusCode.OK) {
-                val post = response.body<Post>()
-                NetworkResult.Success(post)
-            } else {
-                NetworkResult.Error(null, "Error fetching post by id: ${response.status}")
-            }
-        } catch (e: Exception) {
-            NetworkResult.Error(null, e.message ?: "Unknown error")
-        }
+        val params = mapOf("_embed" to true)
+        return getRequest("${POSTS_END_POINT}/$postId", params)
     }
 
     override suspend fun getPostComments(postId: Int): NetworkResult<List<Comments>> {
-        return try {
-            val response = httpClient.get("$BASE_URL_API$COMMENTS_END_POINT") {
-                headers {
-                    append(HttpHeaders.Authorization, "Basic $AUTH_KEY_SOYDEZARAGOZA")
-                }
-                parameter("post", postId)
-            }
-
-            if (response.status == HttpStatusCode.OK) {
-                val comments = response.body<List<Comments>>()
-                NetworkResult.Success(comments)
-            } else {
-                NetworkResult.Error(null, "Error fetching comments: ${response.status}")
-            }
-        } catch (e: Exception) {
-            NetworkResult.Error(null, e.message ?: "Unknown error")
-        }
+        val params = mapOf("post" to postId)
+        return getRequest(COMMENTS_END_POINT, params)
     }
+
 }
