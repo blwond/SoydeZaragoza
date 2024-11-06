@@ -42,7 +42,7 @@ class RemoteDataSourceImplementation(
 
     override suspend fun getPostsByCategories(): NetworkResult<List<Post>> {
         val params = mapOf(
-            "categories" to 1,   // Modifica esta línea para obtener otras categorías si lo necesitas
+            "categories" to 1,
             "page" to 1,
             "per_page" to 10,
             "_embed" to true
