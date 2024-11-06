@@ -1,38 +1,22 @@
 package com.quehacerenzaragoza.soydezaragoza.app
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.quehacerenzaragoza.soydezaragoza.Greeting
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import soydezaragoza.composeapp.generated.resources.Res
-import soydezaragoza.composeapp.generated.resources.compose_multiplatform
+import androidx.compose.runtime.Composable
+import cafe.adriel.voyager.navigator.Navigator
+import com.quehacerenzaragoza.soydezaragoza.AppTheme
+import com.quehacerenzaragoza.soydezaragoza.di.init
+import com.quehacerenzaragoza.soydezaragoza.presentation.screens.news.NewsScreen
+import org.koin.compose.KoinApplication
 
 @Composable
-@Preview
-fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
+fun App(
+    darkTheme: Boolean,
+    dynamicColor: Boolean
+) {
+    KoinApplication(application = {
+        init()
+    }) {
+        AppTheme(darkTheme = darkTheme, dynamicColor = dynamicColor) {
+            Navigator(NewsScreen)
         }
     }
 }

@@ -3,6 +3,7 @@ package com.quehacerenzaragoza.soydezaragoza
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.quehacerenzaragoza.soydezaragoza.app.App
@@ -12,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App()
+            App(darkTheme = isSystemInDarkTheme(), dynamicColor = true)
         }
     }
 }
@@ -20,5 +21,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App()
+    App(darkTheme = isSystemInDarkTheme(), dynamicColor = true)
 }

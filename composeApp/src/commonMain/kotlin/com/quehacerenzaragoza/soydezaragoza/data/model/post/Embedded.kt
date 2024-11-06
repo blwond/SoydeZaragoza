@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Embedded(
     @SerialName("wp:featuredmedia")
-    val wp_FeaturedMedia: List<WpFeaturedmedia>,
+    val wp_FeaturedMedia: List<WpFeaturedmedia>? = null,
     @SerialName("wp:term")
-    val wp_Term: List<List<WpTerm>>
+    val wp_Term: List<List<WpTerm>>? = null
 )

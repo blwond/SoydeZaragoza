@@ -12,7 +12,11 @@ import com.quehacerenzaragoza.soydezaragoza.util.extensions.POSTS_END_POINT
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.client.request.parameter
+import io.ktor.client.request.url
+import io.ktor.client.statement.bodyAsText
+import io.ktor.client.statement.request
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
@@ -25,7 +29,7 @@ class NewsRemoteDataSourceImplementation(
         return try {
             val response = httpClient.get("$BASE_URL_API$endpoint") {
                 headers {
-                    append(HttpHeaders.Authorization, "Basic $AUTH_KEY_SOYDEZARAGOZA")
+                    append(HttpHeaders.Authorization, AUTH_KEY_SOYDEZARAGOZA)
                 }
                 params?.forEach { (key, value) -> parameter(key, value) }
             }
