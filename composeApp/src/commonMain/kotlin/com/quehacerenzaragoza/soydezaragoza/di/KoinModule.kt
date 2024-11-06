@@ -4,6 +4,8 @@ import com.quehacerenzaragoza.soydezaragoza.data.remote.news.NewsRemoteDataSourc
 import com.quehacerenzaragoza.soydezaragoza.data.remote.news.NewsRemoteDataSourceImplementation
 import com.quehacerenzaragoza.soydezaragoza.data.repository.NewsRepositoryImpl
 import com.quehacerenzaragoza.soydezaragoza.domain.repository.NewsRepository
+import com.quehacerenzaragoza.soydezaragoza.domain.usecase.NewsUseCase
+import com.quehacerenzaragoza.soydezaragoza.presentation.screens.news.NewsViewModel
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.BASE_URL_API
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
@@ -29,15 +31,13 @@ fun KoinApplication.init(){
 }
 
 val useCasesModule = module {
-    /*factory { LoginUseCase(get()) }
-    factory { AllUsersUseCase(get()) }*/
+    factory { NewsUseCase(get()) }
 }
 val repositoriesModule = module {
     single<NewsRepository> { NewsRepositoryImpl(get()) }
 }
 val viewModelsModule = module {
-    /*factory { LoginViewModel(get()) }
-    factory { AllUsersViewModel(get()) }*/
+    factory { NewsViewModel(get()) }
 }
 val dataSourceModule = module {
     single<NewsRemoteDataSource> { NewsRemoteDataSourceImplementation(get()) }
