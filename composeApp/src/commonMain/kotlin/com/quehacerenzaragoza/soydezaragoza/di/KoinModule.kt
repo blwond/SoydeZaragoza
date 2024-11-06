@@ -1,5 +1,9 @@
 package com.quehacerenzaragoza.soydezaragoza.di
 
+import com.quehacerenzaragoza.soydezaragoza.data.remote.news.NewsRemoteDataSource
+import com.quehacerenzaragoza.soydezaragoza.data.remote.news.NewsRemoteDataSourceImplementation
+import com.quehacerenzaragoza.soydezaragoza.data.repository.NewsRepositoryImpl
+import com.quehacerenzaragoza.soydezaragoza.domain.repository.NewsRepository
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.BASE_URL_API
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
@@ -29,15 +33,14 @@ val useCasesModule = module {
     factory { AllUsersUseCase(get()) }*/
 }
 val repositoriesModule = module {
-    /*single<LoginRepository> { LoginRepositoryImpl(get()) }
-    single<AllUsersRepository> { AllUsersRepositoryImpl(get()) }*/
+    single<NewsRepository> { NewsRepositoryImpl(get()) }
 }
 val viewModelsModule = module {
     /*factory { LoginViewModel(get()) }
     factory { AllUsersViewModel(get()) }*/
 }
 val dataSourceModule = module {
-    /*single<RemoteDataSource> { RemoteDataSourceImpl(get()) }*/
+    single<NewsRemoteDataSource> { NewsRemoteDataSourceImplementation(get()) }
 }
 val provideHttpClientModule = module {
     single {

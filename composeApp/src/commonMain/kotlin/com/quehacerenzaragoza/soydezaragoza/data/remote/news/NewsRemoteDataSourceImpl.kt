@@ -1,8 +1,9 @@
-package com.quehacerenzaragoza.soydezaragoza.data.remote
+package com.quehacerenzaragoza.soydezaragoza.data.remote.news
 
 import com.quehacerenzaragoza.soydezaragoza.data.model.category.Categories
 import com.quehacerenzaragoza.soydezaragoza.data.model.comments.Comments
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
+import com.quehacerenzaragoza.soydezaragoza.data.remote.NetworkResult
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.AUTH_KEY_SOYDEZARAGOZA
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.BASE_URL_API
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.CATEGORIES_END_POINT
@@ -16,9 +17,9 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 
-class RemoteDataSourceImplementation(
+class NewsRemoteDataSourceImplementation(
     private val httpClient: HttpClient
-) : RemoteDataSource() {
+) : NewsRemoteDataSource() {
 
     private suspend inline fun <reified T> getRequest(endpoint: String, params: Map<String, Any>? = null): NetworkResult<T> {
         return try {

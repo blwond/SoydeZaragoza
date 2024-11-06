@@ -1,10 +1,11 @@
-package com.quehacerenzaragoza.soydezaragoza.data.remote
+package com.quehacerenzaragoza.soydezaragoza.data.remote.news
 
 import com.quehacerenzaragoza.soydezaragoza.data.model.category.Categories
 import com.quehacerenzaragoza.soydezaragoza.data.model.comments.Comments
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
+import com.quehacerenzaragoza.soydezaragoza.data.remote.NetworkResult
 
-abstract class RemoteDataSource {
+abstract class NewsRemoteDataSource {
 
     abstract suspend fun getPostsByCategories(): NetworkResult<List<Post>>
 
