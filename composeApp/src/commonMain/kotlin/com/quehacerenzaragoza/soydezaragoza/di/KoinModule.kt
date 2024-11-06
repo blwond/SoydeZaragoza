@@ -1,6 +1,6 @@
 package com.quehacerenzaragoza.soydezaragoza.di
 
-import com.quehacerenzaragoza.soydezaragoza.util.extensions.BASE_URL
+import com.quehacerenzaragoza.soydezaragoza.util.extensions.BASE_URL_API
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -46,7 +46,7 @@ val provideHttpClientModule = module {
                 level = LogLevel.ALL
             }
             install(DefaultRequest) {
-                url(BASE_URL)
+                url(BASE_URL_API)
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
             install(ContentNegotiation) {

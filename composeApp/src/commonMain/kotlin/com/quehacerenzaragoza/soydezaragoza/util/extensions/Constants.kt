@@ -1,6 +1,7 @@
 package com.quehacerenzaragoza.soydezaragoza.util.extensions
 
 const val BASE_URL = "https://soydezaragoza.es/"
+const val BASE_URL_API = "https://soydezaragoza.es/wp-json/"
 const val POSTS_END_POINT = "wp/v2/posts"
 const val POST_REVISIONS_END_POINT = "wp/v2/posts/{id}/revisions"
 const val CATEGORIES_END_POINT = "wp/v2/categories"
