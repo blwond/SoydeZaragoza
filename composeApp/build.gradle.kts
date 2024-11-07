@@ -65,6 +65,8 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
+            //Shimmer
+            implementation(libs.compose.shimmer)
 
             implementation(libs.kotlinx.serialization)
         }
