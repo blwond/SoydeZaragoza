@@ -8,5 +8,8 @@ data class Post(
     val content: Content,
     val date: String,
     val id: Int,
-    val title: Title
+    val title: Title,
+    val primary_category: String,
+    val primary_category_id: Int,
+    val excerpt: Excerpt
 )

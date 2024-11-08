@@ -1,4 +1,4 @@
-package com.app.cmpproject.util.theme
+package com.quehacerenzaragoza.soydezaragoza.util.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme

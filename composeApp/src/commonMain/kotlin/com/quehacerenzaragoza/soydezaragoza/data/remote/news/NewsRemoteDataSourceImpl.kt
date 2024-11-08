@@ -47,10 +47,12 @@ class NewsRemoteDataSourceImplementation(
 
     override suspend fun getPostsByCategories(): NetworkResult<List<Post>> {
         val params = mapOf(
-            "categories" to 1,
+            //"categories" to 1,
             "page" to 1,
             "per_page" to 10,
-            "_embed" to true
+            "_embed" to true,
+            "order" to "desc",
+            "orderby" to "date"
         )
         return getRequest(POSTS_END_POINT, params)
     }

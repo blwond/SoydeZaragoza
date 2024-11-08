@@ -2,7 +2,9 @@ package com.quehacerenzaragoza.soydezaragoza
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.app.cmpproject.util.theme.*
+import com.quehacerenzaragoza.soydezaragoza.util.theme.DarkColorScheme
+import com.quehacerenzaragoza.soydezaragoza.util.theme.LightColorScheme
+import com.quehacerenzaragoza.soydezaragoza.util.theme.Typography
 
 @Composable
 actual fun AppTheme(

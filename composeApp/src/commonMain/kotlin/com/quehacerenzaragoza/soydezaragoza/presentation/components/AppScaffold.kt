@@ -5,7 +5,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
-// Compose wrapper scaffold for this project
+
 @Composable
 fun AppScaffold(
     modifier: Modifier = Modifier,
