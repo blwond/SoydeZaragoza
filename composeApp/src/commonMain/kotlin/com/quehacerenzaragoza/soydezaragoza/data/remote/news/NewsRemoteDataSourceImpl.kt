@@ -62,6 +62,14 @@ class NewsRemoteDataSourceImplementation(
         return getRequest(CATEGORIES_END_POINT, params)
     }
 
+    override suspend fun getTrendingPosts(): NetworkResult<List<Post>> {
+        val params = mapOf(
+            "_embed" to true,
+            "tags" to 232
+        )
+        return getRequest(POSTS_END_POINT, params)
+    }
+
     override suspend fun getPostById(postId: Int): NetworkResult<Post> {
         val params = mapOf("_embed" to true)
         return getRequest("${POSTS_END_POINT}/$postId", params)

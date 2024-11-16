@@ -22,6 +22,11 @@ class NewsViewModel(
     private val _state = MutableStateFlow(NewsScreenState())
     val state = _state.asStateFlow()
 
+    init {
+        getPostsByCategories()
+        getTrendingPosts()
+    }
+
     fun getPostsByCategories() {
         viewModelScope.launch {
             _state.update { it.copy(postsState = ObtainDataState.Loading) }
@@ -67,6 +72,33 @@ class NewsViewModel(
                     is NetworkResult.Error -> _state.update {
                         it.copy(
                             categoriesState = ObtainDataState.Error(
+                                response.message ?: "Unknown error"
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun getTrendingPosts() {
+        viewModelScope.launch {
+            _state.update { it.copy(trendingPostsState = ObtainDataState.Loading) }
+            newsUseCase.getTrendingPosts().collect { response ->
+                when (response) {
+                    is NetworkResult.Loading -> _state.update {
+                        it.copy(trendingPostsState = ObtainDataState.Loading)
+                    }
+
+                    is NetworkResult.Success -> _state.update {
+                        ObtainDataState.Success(response.data ?: emptyList()).let { successState ->
+                            it.copy(trendingPostsState = successState)
+                        }
+                    }
+
+                    is NetworkResult.Error -> _state.update {
+                        it.copy(
+                            trendingPostsState = ObtainDataState.Error(
                                 response.message ?: "Unknown error"
                             )
                         )

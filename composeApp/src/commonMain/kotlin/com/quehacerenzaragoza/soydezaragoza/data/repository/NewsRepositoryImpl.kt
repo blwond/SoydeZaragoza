@@ -29,6 +29,14 @@ class NewsRepositoryImpl (private val remoteDataSource: NewsRemoteDataSource) : 
         }
     }
 
+    override suspend fun getTrendingPosts(): Flow<NetworkResult<List<Post>>> {
+        return flow {
+            emit(NetworkResult.Loading(true))
+            val response = remoteDataSource.getTrendingPosts()
+            emit(response)
+        }
+    }
+
     override suspend fun getPostById(postId: Int): Flow<NetworkResult<Post>> {
         return flow {
             emit(NetworkResult.Loading(true))

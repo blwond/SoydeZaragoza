@@ -8,6 +8,7 @@ import com.quehacerenzaragoza.soydezaragoza.presentation.components.ObtainDataSt
 data class NewsScreenState(
     val postsState: ObtainDataState<List<Post>> = ObtainDataState.Idle,
     val categoriesState: ObtainDataState<List<Categories>> = ObtainDataState.Idle,
+    val trendingPostsState: ObtainDataState<List<Post>> = ObtainDataState.Idle,
     val selectedPostState: ObtainDataState<Post> = ObtainDataState.Idle,
     val commentsState: ObtainDataState<List<Comments>> = ObtainDataState.Idle
 )

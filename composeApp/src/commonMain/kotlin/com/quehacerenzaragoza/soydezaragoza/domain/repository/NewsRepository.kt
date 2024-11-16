@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface NewsRepository {
     suspend fun getPostsByCategories(): Flow<NetworkResult<List<Post>>>
     suspend fun getCategories(): Flow<NetworkResult<List<Categories>>>
+    suspend fun getTrendingPosts(): Flow<NetworkResult<List<Post>>>
     suspend fun getPostById(postId: Int): Flow<NetworkResult<Post>>
     suspend fun getPostComments(postId: Int): Flow<NetworkResult<List<Comments>>>
 }

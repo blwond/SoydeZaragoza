@@ -11,6 +11,8 @@ abstract class NewsRemoteDataSource {
 
     abstract suspend fun getCategories(): NetworkResult<List<Categories>>
 
+    abstract suspend fun getTrendingPosts(): NetworkResult<List<Post>>
+
     abstract suspend fun getPostById(postId: Int): NetworkResult<Post>
 
     abstract suspend fun getPostComments(postId: Int): NetworkResult<List<Comments>>

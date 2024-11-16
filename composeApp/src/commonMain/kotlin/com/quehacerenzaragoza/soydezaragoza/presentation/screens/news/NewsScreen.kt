@@ -48,20 +48,16 @@ import compose.icons.feathericons.Heart
 import compose.icons.feathericons.ThumbsUp
 
 object NewsScreen : Screen {
+
     @Composable
     override fun Content() {
         val viewModel: NewsViewModel = viewModel()
         MainContent(viewModel)
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MainContent(viewModel: NewsViewModel) {
         val newsState by viewModel.state.collectAsState()
-
-        LaunchedEffect(Unit) {
-            viewModel.getPostsByCategories()
-        }
 
         AppScaffold(
             topAppBar = {
@@ -78,40 +74,22 @@ object NewsScreen : Screen {
 
     @Composable
     fun NewsScreenContent(newsState: NewsScreenState, paddingValues: PaddingValues){
-        Column(modifier = Modifier.padding(paddingValues).padding(horizontal = 20.dp)) {
-            when (val postsState = newsState.postsState) {
-                is ObtainDataState.Loading -> {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        items(5) {
-                            ShimmeringPostCardPlaceholder()
-                        }
-                    }
-                }
+        Column (modifier = Modifier.padding(paddingValues).padding(horizontal = 20.dp)) {
 
-                is ObtainDataState.Success -> {
-                    val posts = postsState.data
-                    //BORRAR TEMPORAL
-                    TrendingNews(posts[0])
-                    //BORRAR TEMPORAL
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        items(posts) { post ->
-                            PostCard(post = post)
-                        }
-                    }
-                }
+            ContentState(
+                postsState = newsState.trendingPostsState,
+                content = { post -> TrendingNews(post = post) },
+                placeholder = { ShimmeringPostCardPlaceholder() },
+                placeholderItems = 1
+            )
 
-                is ObtainDataState.Error -> {
-                    Text("Error: ${postsState.message}", color = Color.Red)
-                }
+            ContentState(
+                postsState = newsState.postsState,
+                content = { post -> PostCard(post = post) },
+                placeholder = { ShimmeringPostCardPlaceholder() },
+                placeholderItems = 5
+            )
 
-                ObtainDataState.Idle -> {
-
-                }
-            }
         }
     }
 
@@ -205,6 +183,36 @@ object NewsScreen : Screen {
                 }
             }
 
+        }
+    }
+
+    @Composable
+    fun ContentState(
+        postsState: ObtainDataState<List<Post>>,
+        content: @Composable (post: Post) -> Unit,
+        placeholder: @Composable () -> Unit,
+        placeholderItems: Int
+    ) {
+        when (postsState) {
+            is ObtainDataState.Loading -> {
+                LazyColumn {
+                    items(placeholderItems) {
+                        placeholder()
+                    }
+                }
+            }
+            is ObtainDataState.Success -> {
+                val posts = postsState.data
+                LazyColumn {
+                    items(posts) { post ->
+                        content(post)
+                    }
+                }
+            }
+            is ObtainDataState.Error -> {
+                Text("Error: ${postsState.message}", color = Color.Red)
+            }
+            ObtainDataState.Idle -> {}
         }
     }
 }

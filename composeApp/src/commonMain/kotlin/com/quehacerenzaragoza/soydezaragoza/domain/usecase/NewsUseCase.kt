@@ -18,6 +18,9 @@ class NewsUseCase(private val newsRepository: NewsRepository) {
     suspend fun getCategories(): Flow<NetworkResult<List<Categories>>> {
         return newsRepository.getCategories()
     }
+    suspend fun getTrendingPosts(): Flow<NetworkResult<List<Post>>> {
+        return newsRepository.getTrendingPosts()
+    }
     suspend fun getPostById(postId: Int): Flow<NetworkResult<Post>> {
         return newsRepository.getPostById(postId)
     }
