@@ -76,14 +76,14 @@ object NewsScreen : Screen {
     fun NewsScreenContent(newsState: NewsScreenState, paddingValues: PaddingValues){
         Column (modifier = Modifier.padding(paddingValues).padding(horizontal = 20.dp)) {
 
-            ContentState(
+            PostsStatefulList(
                 postsState = newsState.trendingPostsState,
                 content = { post -> TrendingNews(post = post) },
                 placeholder = { ShimmeringPostCardPlaceholder() },
                 placeholderItems = 1
             )
 
-            ContentState(
+            PostsStatefulList(
                 postsState = newsState.postsState,
                 content = { post -> PostCard(post = post) },
                 placeholder = { ShimmeringPostCardPlaceholder() },
@@ -187,7 +187,7 @@ object NewsScreen : Screen {
     }
 
     @Composable
-    fun ContentState(
+    fun PostsStatefulList(
         postsState: ObtainDataState<List<Post>>,
         content: @Composable (post: Post) -> Unit,
         placeholder: @Composable () -> Unit,
