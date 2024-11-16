@@ -38,10 +38,16 @@ actual fun AppTheme(
         // handling the status bar color theme
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = colorScheme.background.toArgb()
             WindowCompat.getInsetsController(
                 window, view
-            ).isAppearanceLightStatusBars = darkTheme
+            ).isAppearanceLightStatusBars = !darkTheme
+
+            window.navigationBarColor = colorScheme.background.toArgb()
+
+            WindowCompat.getInsetsController(
+                window, view
+            ).isAppearanceLightNavigationBars = !darkTheme
         }
     }
 

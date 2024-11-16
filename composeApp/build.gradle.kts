@@ -67,7 +67,11 @@ kotlin {
             implementation(libs.coil.network.ktor)
             //Shimmer
             implementation(libs.compose.shimmer)
+            //Icons
+            implementation(libs.feather)
 
+
+            implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization)
         }
         iosMain.dependencies {

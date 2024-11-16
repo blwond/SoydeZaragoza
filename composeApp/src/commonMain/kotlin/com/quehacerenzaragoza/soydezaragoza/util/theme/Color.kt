@@ -3,61 +3,62 @@ package com.quehacerenzaragoza.soydezaragoza.util.theme
 import androidx.compose.ui.graphics.Color
 
 // LIGHT
-val GreenPrimaryLight = Color(0xff006e26)
-val OnGreenLight = Color(0xffffffff)
-val GreenContainerLight = Color(0xff6cff82)
-val OnGreenContainerLight = Color(0xff002106)
+val BluePrimaryLight = Color(0xff111b31)
+val OnBlueLight = Color(0xffffffff)
+val BlueContainerLight = Color(0xffd4e8f7)
+val OnBlueContainerLight = Color(0xff001d33)
 
-val GreenSecondaryLight = Color(0xff526350)
-val OnGreenSecondaryLight = OnGreenLight
-val GreenSecondaryContainerLight = Color(0xffd4e8d0)
-val OnGreenSecondaryContainerLight = Color(0xff101f10)
+val BlueSecondaryLight = Color(0xff5a92c2)
+val OnBlueSecondaryLight = OnBlueLight
+val BlueSecondaryContainerLight = Color(0xffdbeaf6)
+val OnBlueSecondaryContainerLight = Color(0xff102436)
 
-val GreenTertiaryLight = Color(0xff39656b)
-val OnGreenTertiaryLight = OnGreenLight
-val GreenTertiaryContainerLight = Color(0xffbcebf2)
-val OnGreenTertiaryContainerLight = Color(0xff001f23)
+val BlueTertiaryLight = Color(0xff4a7fa3)
+val OnBlueTertiaryLight = OnBlueLight
+val BlueTertiaryContainerLight = Color(0xffd1ecf9)
+val OnBlueTertiaryContainerLight = Color(0xff001e2c)
 
 val ErrorLight = Color(0xffba1a1a)
 val OnErrorLight = Color(0xffffffff)
 val ErrorContainerLight = Color(0xffffdad6)
 val OnErrorContainerLight = Color(0xff410002)
 
-val BackgroundLight = Color(0xfffcfdf7)
-val OnBackgroundLight = Color(0xff1a1c19)
+val BackgroundLight = Color(0xfffefefe)
+val OnBackgroundLight = Color(0xff6aa6de)
 val SurfaceLight = BackgroundLight
 val OnSurfaceLight = OnBackgroundLight
-val SurfaceVariantLight = Color(0xffdee5d9)
-val OnSurfaceVariantLight = Color(0xff424940)
+val SurfaceVariantLight = Color(0xffdae4ef)
+val OnSurfaceVariantLight = Color(0xff39424a)
 
-val OutlineLight = Color(0xff72796f)
+val OutlineLight = Color(0xff5d6f84)
 
 // DARK
-val GreenPrimaryDark = Color(0xff00e559)
-val OnGreenDark = Color(0xff003910)
-val GreenContainerDark = Color(0xff00531b)
-val OnGreenContainerDark = Color(0xff6cff82)
+val BluePrimaryDark = Color(0xff7ab0e3)
+val OnBlueDark = Color(0xff001d33)
+val BlueContainerDark = Color(0xff00497a)
+val OnBlueContainerDark = Color(0xffd4e8f7)
 
-val GreenSecondaryDark = Color(0xffb9ccb5)
-val OnGreenSecondaryDark = OnGreenDark
-val GreenSecondaryContainerDark = Color(0xff3a4b39)
-val OnGreenSecondaryContainerDark = Color(0xffd4e8d0)
+val BlueSecondaryDark = Color(0xffa1c9e8)
+val OnBlueSecondaryDark = OnBlueDark
+val BlueSecondaryContainerDark = Color(0xff2f4861)
+val OnBlueSecondaryContainerDark = Color(0xffdbeaf6)
 
-val GreenTertiaryDark = Color(0xffa1ced5)
-val OnGreenTertiaryDark = Color(0xff00363c)
-val GreenTertiaryContainerDark = Color(0xff1f4d53)
-val OnGreenTertiaryContainerDark = Color(0xffbcebf2)
+val BlueTertiaryDark = Color(0xff87b5d3)
+val OnBlueTertiaryDark = Color(0xff001e2c)
+val BlueTertiaryContainerDark = Color(0xff2e5066)
+val OnBlueTertiaryContainerDark = Color(0xffd1ecf9)
 
 val ErrorDark = Color(0xffffb4ab)
 val OnErrorDark = Color(0xff690005)
 val ErrorContainerDark = Color(0xff93000a)
 val OnErrorContainerDark = Color(0xffffdad6)
 
-val BackgroundDark = Color(0xff1a1c19)
-val OnBackgroundDark = Color(0xffe2e3dd)
+val BackgroundDark = Color(0xff1a1e23)
+val OnBackgroundDark = Color(0xffe3e8ed)
 val SurfaceDark = BackgroundDark
 val OnSurfaceDark = OnBackgroundDark
-val SurfaceVariantDark = Color(0xff424940)
-val OnSurfaceVariantDark = Color(0xffc2c9bd)
+val SurfaceVariantDark = Color(0xff39424a)
+val OnSurfaceVariantDark = Color(0xffc4ced8)
 
-val OutlineDark = Color(0xff72796f)
+val OutlineDark = Color(0xff5d6f84)
+

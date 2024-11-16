@@ -25,13 +25,14 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.removeHtmlTags
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun PostCard(post: Post) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(vertical = 8.dp)
             .height(200.dp),
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -51,7 +52,6 @@ fun PostCard(post: Post) {
                 text = "Fecha: ${post.date}",
                 color = Color.White,
                 modifier = Modifier
-                    .padding(8.dp)
                     .align(Alignment.TopStart)
                     .background(Color(0xAA000000), shape = RoundedCornerShape(4.dp))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
@@ -76,14 +76,14 @@ fun PostCard(post: Post) {
                     Text(
                         text = post.title.rendered,
                         style = MaterialTheme.typography.titleLarge,
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.background,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
 
                     Text(
                         text = post.excerpt.rendered.removeHtmlTags(),
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.background,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )

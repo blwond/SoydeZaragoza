@@ -21,7 +21,7 @@ fun ShimmeringPostCardPlaceholder() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(vertical = 8.dp)
             .height(200.dp)
             .shimmer(),
         shape = RoundedCornerShape(8.dp)
