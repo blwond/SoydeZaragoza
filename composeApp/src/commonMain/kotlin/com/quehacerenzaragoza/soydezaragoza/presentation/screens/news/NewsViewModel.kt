@@ -2,6 +2,7 @@ package com.quehacerenzaragoza.soydezaragoza.presentation.screens.news
 
 import com.quehacerenzaragoza.soydezaragoza.core.ViewModel
 import com.quehacerenzaragoza.soydezaragoza.core.viewModelScope
+import com.quehacerenzaragoza.soydezaragoza.data.model.category.Category
 import com.quehacerenzaragoza.soydezaragoza.data.remote.NetworkResult
 import com.quehacerenzaragoza.soydezaragoza.domain.usecase.NewsUseCase
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.ObtainDataState
@@ -19,7 +20,9 @@ class NewsViewModel(
     private val newsUseCase: NewsUseCase
 ) : ViewModel {
 
-    private val _state = MutableStateFlow(NewsScreenState())
+    private val _state = MutableStateFlow(NewsScreenState(
+        onCategorySelected = { category -> selectCategory(category) }
+    ))
     val state = _state.asStateFlow()
 
     init {
@@ -159,6 +162,12 @@ class NewsViewModel(
                     }
                 }
             }
+        }
+    }
+
+    fun selectCategory(category: Category) {
+        _state.update { currentState ->
+            currentState.copy(selectedCategory = category)
         }
     }
 

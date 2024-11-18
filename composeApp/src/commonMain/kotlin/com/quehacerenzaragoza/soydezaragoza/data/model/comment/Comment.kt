@@ -1,9 +1,9 @@
-package com.quehacerenzaragoza.soydezaragoza.data.model.comments
+package com.quehacerenzaragoza.soydezaragoza.data.model.comment
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Comments(
+data class Comment(
     val author_name: String,
     val content: String,
     val date: String,

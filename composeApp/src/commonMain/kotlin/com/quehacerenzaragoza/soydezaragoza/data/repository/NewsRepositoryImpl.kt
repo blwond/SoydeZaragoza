@@ -1,7 +1,7 @@
 package com.quehacerenzaragoza.soydezaragoza.data.repository
 
-import com.quehacerenzaragoza.soydezaragoza.data.model.category.Categories
-import com.quehacerenzaragoza.soydezaragoza.data.model.comments.Comments
+import com.quehacerenzaragoza.soydezaragoza.data.model.category.Category
+import com.quehacerenzaragoza.soydezaragoza.data.model.comment.Comment
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
 import com.quehacerenzaragoza.soydezaragoza.data.remote.NetworkResult
 import com.quehacerenzaragoza.soydezaragoza.data.remote.news.NewsRemoteDataSource
@@ -21,7 +21,7 @@ class NewsRepositoryImpl (private val remoteDataSource: NewsRemoteDataSource) : 
         }
     }
 
-    override suspend fun getCategories(): Flow<NetworkResult<List<Categories>>> {
+    override suspend fun getCategories(): Flow<NetworkResult<List<Category>>> {
         return flow {
             emit(NetworkResult.Loading(true))
             val response = remoteDataSource.getCategories()
@@ -45,7 +45,7 @@ class NewsRepositoryImpl (private val remoteDataSource: NewsRemoteDataSource) : 
         }
     }
 
-    override suspend fun getPostComments(postId: Int): Flow<NetworkResult<List<Comments>>> {
+    override suspend fun getPostComments(postId: Int): Flow<NetworkResult<List<Comment>>> {
         return flow {
             emit(NetworkResult.Loading(true))
             val response = remoteDataSource.getPostComments(postId)

@@ -50,7 +50,7 @@ fun ShimmeringPostCardPlaceholder() {
                         .padding(bottom = 8.dp)
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
                 Box(
                     modifier = Modifier
@@ -84,7 +84,7 @@ fun ShimmeringPostCardPlaceholder() {
                             .background(Color.LightGray, shape = RoundedCornerShape(4.dp))
                     )
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(12.dp))
 
                     Box(
                         modifier = Modifier

@@ -1,7 +1,7 @@
 package com.quehacerenzaragoza.soydezaragoza.domain.repository
 
-import com.quehacerenzaragoza.soydezaragoza.data.model.category.Categories
-import com.quehacerenzaragoza.soydezaragoza.data.model.comments.Comments
+import com.quehacerenzaragoza.soydezaragoza.data.model.category.Category
+import com.quehacerenzaragoza.soydezaragoza.data.model.comment.Comment
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
 import com.quehacerenzaragoza.soydezaragoza.data.remote.NetworkResult
 import kotlinx.coroutines.flow.Flow
@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
  * */
 interface NewsRepository {
     suspend fun getPostsByCategories(): Flow<NetworkResult<List<Post>>>
-    suspend fun getCategories(): Flow<NetworkResult<List<Categories>>>
+    suspend fun getCategories(): Flow<NetworkResult<List<Category>>>
     suspend fun getTrendingPosts(): Flow<NetworkResult<List<Post>>>
     suspend fun getPostById(postId: Int): Flow<NetworkResult<Post>>
-    suspend fun getPostComments(postId: Int): Flow<NetworkResult<List<Comments>>>
+    suspend fun getPostComments(postId: Int): Flow<NetworkResult<List<Comment>>>
 }

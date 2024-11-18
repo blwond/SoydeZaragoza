@@ -1,7 +1,7 @@
 package com.quehacerenzaragoza.soydezaragoza.data.remote.news
 
-import com.quehacerenzaragoza.soydezaragoza.data.model.category.Categories
-import com.quehacerenzaragoza.soydezaragoza.data.model.comments.Comments
+import com.quehacerenzaragoza.soydezaragoza.data.model.category.Category
+import com.quehacerenzaragoza.soydezaragoza.data.model.comment.Comment
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
 import com.quehacerenzaragoza.soydezaragoza.data.remote.NetworkResult
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.AUTH_KEY_SOYDEZARAGOZA
@@ -12,11 +12,7 @@ import com.quehacerenzaragoza.soydezaragoza.util.extensions.POSTS_END_POINT
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.client.request.header
 import io.ktor.client.request.parameter
-import io.ktor.client.request.url
-import io.ktor.client.statement.bodyAsText
-import io.ktor.client.statement.request
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
@@ -57,7 +53,7 @@ class NewsRemoteDataSourceImplementation(
         return getRequest(POSTS_END_POINT, params)
     }
 
-    override suspend fun getCategories(): NetworkResult<List<Categories>> {
+    override suspend fun getCategories(): NetworkResult<List<Category>> {
         val params = mapOf("per_page" to 50)
         return getRequest(CATEGORIES_END_POINT, params)
     }
@@ -75,7 +71,7 @@ class NewsRemoteDataSourceImplementation(
         return getRequest("${POSTS_END_POINT}/$postId", params)
     }
 
-    override suspend fun getPostComments(postId: Int): NetworkResult<List<Comments>> {
+    override suspend fun getPostComments(postId: Int): NetworkResult<List<Comment>> {
         val params = mapOf("post" to postId)
         return getRequest(COMMENTS_END_POINT, params)
     }

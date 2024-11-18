@@ -41,8 +41,8 @@ fun PostCard(post: Post) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .height(120.dp)
+            .padding(bottom = 24.dp)
+
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -57,7 +57,7 @@ fun PostCard(post: Post) {
                     text = post.primary_category,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.Gray,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = 2.dp)
                 )
 
                 Text(
@@ -88,7 +88,7 @@ fun PostCard(post: Post) {
                         color = Color.Gray
                     )
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(12.dp))
 
                     Icon(
                         imageVector = FeatherIcons.Heart,

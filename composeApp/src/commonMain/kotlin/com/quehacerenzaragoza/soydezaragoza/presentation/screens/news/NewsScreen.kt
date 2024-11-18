@@ -1,6 +1,7 @@
 package com.quehacerenzaragoza.soydezaragoza.presentation.screens.news
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,16 +12,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -30,23 +31,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import coil3.compose.AsyncImage
 import com.quehacerenzaragoza.soydezaragoza.core.BackHandler
 import com.quehacerenzaragoza.soydezaragoza.core.viewModel
-import com.quehacerenzaragoza.soydezaragoza.data.model.category.Categories
+import com.quehacerenzaragoza.soydezaragoza.data.model.category.Category
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.AppScaffold
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.ObtainDataState
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.NewsTopAppBar
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.PostCard
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.ShimmeringPostCardPlaceholder
+import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.ShimmeringTrendingNewsPlaceholder
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.getRelativeTimeFromNow
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Clock
 import compose.icons.feathericons.Heart
-import compose.icons.feathericons.ThumbsUp
 
 object NewsScreen : Screen {
 
@@ -79,17 +79,33 @@ object NewsScreen : Screen {
 
             PostsStatefulList(
                 postsState = newsState.trendingPostsState,
-                content = { post -> TrendingNews(post = post) },
+                content = { post -> TrendingNew(post = post) },
+                placeholder = { ShimmeringTrendingNewsPlaceholder() },
+                placeholderItems = 1
+            )
+
+            Spacer(Modifier.height(24.dp))
+
+            Row {
+                Text(
+                    text = "Por categorías",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            CategoriesStatefulList(
+                categoriesState = newsState.categoriesState,
+                selectedCategory = newsState.selectedCategory,
+                onCategorySelected = { category -> newsState.onCategorySelected(category) },
                 placeholder = { ShimmeringPostCardPlaceholder() },
                 placeholderItems = 1
             )
 
-            CategoriesStatefulList(
-                categoriesState = newsState.categoriesState,
-                content = { category -> CategoriesView(category = category) },
-                placeholder = { ShimmeringPostCardPlaceholder() },
-                placeholderItems = 1
-            )
+            Spacer(Modifier.height(24.dp))
 
             PostsStatefulList(
                 postsState = newsState.postsState,
@@ -102,7 +118,7 @@ object NewsScreen : Screen {
     }
 
     @Composable
-    fun TrendingNews(post: Post){
+    fun TrendingNew(post: Post){
         Column {
             Card(
                 modifier = Modifier
@@ -195,16 +211,26 @@ object NewsScreen : Screen {
     }
 
     @Composable
-    fun CategoriesView(category: Categories){
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+    fun CategoryView(
+        category: Category,
+        isSelected: Boolean,
+        onCategoryClick: (Category) -> Unit
+    ) {
+        Row(
+            modifier = Modifier
+                .wrapContentWidth()
+                .padding(end = 15.dp)
+                .clickable { onCategoryClick(category) }
+                .background(
+                    color = if (isSelected) MaterialTheme.colorScheme.primary else Color.LightGray,
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .padding(horizontal = 12.dp, vertical = 8.dp)
         ) {
             Text(
                 text = category.name,
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.Gray,
-                modifier = Modifier.weight(1f)
+                style = MaterialTheme.typography.labelLarge,
+                color = if (isSelected) MaterialTheme.colorScheme.onPrimary else Color.DarkGray
             )
         }
     }
@@ -241,14 +267,15 @@ object NewsScreen : Screen {
 
     @Composable
     fun CategoriesStatefulList(
-        categoriesState: ObtainDataState<List<Categories>>,
-        content: @Composable (category: Categories) -> Unit,
+        categoriesState: ObtainDataState<List<Category>>,
+        selectedCategory: Category?,
+        onCategorySelected: (Category) -> Unit,
         placeholder: @Composable () -> Unit,
         placeholderItems: Int
     ) {
         when (categoriesState) {
             is ObtainDataState.Loading -> {
-                LazyColumn {
+                LazyRow {
                     items(placeholderItems) {
                         placeholder()
                     }
@@ -256,9 +283,13 @@ object NewsScreen : Screen {
             }
             is ObtainDataState.Success -> {
                 val categories = categoriesState.data
-                LazyColumn {
+                LazyRow {
                     items(categories) { category ->
-                        content(category)
+                        CategoryView(
+                            category = category,
+                            isSelected = category == selectedCategory,
+                            onCategoryClick = onCategorySelected
+                        )
                     }
                 }
             }
@@ -268,4 +299,5 @@ object NewsScreen : Screen {
             ObtainDataState.Idle -> {}
         }
     }
+
 }
