@@ -25,6 +25,7 @@ class NewsViewModel(
     init {
         getPostsByCategories()
         getTrendingPosts()
+        getCategories()
     }
 
     fun getPostsByCategories() {

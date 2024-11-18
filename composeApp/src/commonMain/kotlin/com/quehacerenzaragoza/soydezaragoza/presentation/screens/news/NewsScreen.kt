@@ -35,6 +35,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import coil3.compose.AsyncImage
 import com.quehacerenzaragoza.soydezaragoza.core.BackHandler
 import com.quehacerenzaragoza.soydezaragoza.core.viewModel
+import com.quehacerenzaragoza.soydezaragoza.data.model.category.Categories
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.AppScaffold
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.ObtainDataState
@@ -79,6 +80,13 @@ object NewsScreen : Screen {
             PostsStatefulList(
                 postsState = newsState.trendingPostsState,
                 content = { post -> TrendingNews(post = post) },
+                placeholder = { ShimmeringPostCardPlaceholder() },
+                placeholderItems = 1
+            )
+
+            CategoriesStatefulList(
+                categoriesState = newsState.categoriesState,
+                content = { category -> CategoriesView(category = category) },
                 placeholder = { ShimmeringPostCardPlaceholder() },
                 placeholderItems = 1
             )
@@ -187,6 +195,21 @@ object NewsScreen : Screen {
     }
 
     @Composable
+    fun CategoriesView(category: Categories){
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = category.name,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray,
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+
+    @Composable
     fun PostsStatefulList(
         postsState: ObtainDataState<List<Post>>,
         content: @Composable (post: Post) -> Unit,
@@ -211,6 +234,36 @@ object NewsScreen : Screen {
             }
             is ObtainDataState.Error -> {
                 Text("Error: ${postsState.message}", color = Color.Red)
+            }
+            ObtainDataState.Idle -> {}
+        }
+    }
+
+    @Composable
+    fun CategoriesStatefulList(
+        categoriesState: ObtainDataState<List<Categories>>,
+        content: @Composable (category: Categories) -> Unit,
+        placeholder: @Composable () -> Unit,
+        placeholderItems: Int
+    ) {
+        when (categoriesState) {
+            is ObtainDataState.Loading -> {
+                LazyColumn {
+                    items(placeholderItems) {
+                        placeholder()
+                    }
+                }
+            }
+            is ObtainDataState.Success -> {
+                val categories = categoriesState.data
+                LazyColumn {
+                    items(categories) { category ->
+                        content(category)
+                    }
+                }
+            }
+            is ObtainDataState.Error -> {
+                Text("Error: ${categoriesState.message}", color = Color.Red)
             }
             ObtainDataState.Idle -> {}
         }
