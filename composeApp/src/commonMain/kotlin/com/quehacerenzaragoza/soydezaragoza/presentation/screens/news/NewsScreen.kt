@@ -43,6 +43,7 @@ import com.quehacerenzaragoza.soydezaragoza.presentation.components.AppScaffold
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.ObtainDataState
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.NewsTopAppBar
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.PostCard
+import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.ShimmeringCategoryViewPlaceholder
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.ShimmeringPostCardPlaceholder
 import com.quehacerenzaragoza.soydezaragoza.presentation.components.news.ShimmeringTrendingNewsPlaceholder
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.getRelativeTimeFromNow
@@ -112,8 +113,8 @@ object NewsScreen : Screen {
                 categoriesState = newsState.categoriesState,
                 selectedCategory = newsState.selectedCategory,
                 onCategorySelected = { category -> newsState.onCategorySelected(category) },
-                placeholder = { ShimmeringPostCardPlaceholder() },
-                placeholderItems = 1
+                placeholder = { ShimmeringCategoryViewPlaceholder() },
+                placeholderItems = 10
             )
 
             Spacer(Modifier.height(24.dp))
