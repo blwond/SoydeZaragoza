@@ -101,11 +101,9 @@ object NewsScreen : Screen {
                 }
             }
 
-            item {
-                Spacer(Modifier.height(24.dp))
-            }
-
             stickyHeader {
+                Spacer(Modifier.height(24.dp))
+
                 Column (Modifier.background(MaterialTheme.colorScheme.background)) {
                     Row (Modifier.padding(horizontal = 20.dp)) {
                         Text(
