@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
  * interface to make an interaction between [NewsRepositoryImpl] & [NewsUseCase]
  * */
 interface NewsRepository {
-    suspend fun getPostsByCategories(): Flow<NetworkResult<List<Post>>>
+    suspend fun getPostsByCategories(categoryId: Int): Flow<NetworkResult<List<Post>>>
     suspend fun getCategories(): Flow<NetworkResult<List<Category>>>
     suspend fun getTrendingPosts(): Flow<NetworkResult<List<Post>>>
     suspend fun getPostById(postId: Int): Flow<NetworkResult<Post>>

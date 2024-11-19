@@ -26,15 +26,15 @@ class NewsViewModel(
     val state = _state.asStateFlow()
 
     init {
-        getPostsByCategories()
         getTrendingPosts()
         getCategories()
+        getPostsByCategories(state.value.selectedCategory.id)
     }
 
-    fun getPostsByCategories() {
+    fun getPostsByCategories(categoryId: Int) {
         viewModelScope.launch {
             _state.update { it.copy(postsState = ObtainDataState.Loading) }
-            newsUseCase.getPostsByCategories().collect { response ->
+            newsUseCase.getPostsByCategories(state.value.selectedCategory.id).collect { response ->
                 when (response) {
                     is NetworkResult.Loading -> _state.update {
                         it.copy(postsState = ObtainDataState.Loading)
@@ -169,6 +169,7 @@ class NewsViewModel(
         _state.update { currentState ->
             currentState.copy(selectedCategory = category)
         }
+        getPostsByCategories(state.value.selectedCategory.id)
     }
 
 }

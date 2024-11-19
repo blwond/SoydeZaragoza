@@ -142,7 +142,7 @@ object NewsScreen : Screen {
                 Box(modifier = Modifier.padding(horizontal = 20.dp)) {
                     PostsStatefulList(
                         postsState = newsState.postsState,
-                        content = { post -> PostCard(post = post) },
+                        content = { post -> PostCard(post = post, newsState) },
                         placeholder = { ShimmeringPostCardPlaceholder() },
                         placeholderItems = 5
                     )
@@ -298,7 +298,7 @@ object NewsScreen : Screen {
                 }
             }
             is ObtainDataState.Error -> {
-                Text("Error: ${postsState.message}", color = Color.Red)
+                println("Error: ${postsState.message}")
             }
             ObtainDataState.Idle -> {}
         }
@@ -345,15 +345,9 @@ object NewsScreen : Screen {
                         )
                     }
                 }
-
-                if (selectedCategory == null) {
-                    LaunchedEffect(Unit) {
-                        onCategorySelected(allCategory)
-                    }
-                }
             }
             is ObtainDataState.Error -> {
-                Text("Error: ${categoriesState.message}", color = Color.Red)
+                println("Error: ${categoriesState.message}")
             }
             ObtainDataState.Idle -> {}
         }

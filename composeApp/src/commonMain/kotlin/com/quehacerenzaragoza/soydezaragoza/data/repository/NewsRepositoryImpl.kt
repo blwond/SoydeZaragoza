@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.flow
  * Repository class for fetching News data from server
  * */
 class NewsRepositoryImpl (private val remoteDataSource: NewsRemoteDataSource) : NewsRepository {
-    override suspend fun getPostsByCategories(): Flow<NetworkResult<List<Post>>> {
+    override suspend fun getPostsByCategories(categoryId: Int): Flow<NetworkResult<List<Post>>> {
         return flow {
             emit(NetworkResult.Loading(true))
-            val response = remoteDataSource.getPostsByCategories()
+            val response = remoteDataSource.getPostsByCategories(categoryId)
             emit(response)
         }
     }

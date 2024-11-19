@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.quehacerenzaragoza.soydezaragoza.data.model.post.Post
+import com.quehacerenzaragoza.soydezaragoza.presentation.screens.news.NewsScreenState
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.getRelativeTimeFromNow
 import com.quehacerenzaragoza.soydezaragoza.util.extensions.removeHtmlTags
 import compose.icons.FeatherIcons
@@ -37,7 +38,7 @@ import compose.icons.feathericons.Heart
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun PostCard(post: Post) {
+fun PostCard(post: Post, newsState: NewsScreenState) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -54,7 +55,7 @@ fun PostCard(post: Post) {
                     .align(Alignment.CenterVertically)
             ) {
                 Text(
-                    text = post.primary_category,
+                    text = if (newsState.selectedCategory.id != -1) newsState.selectedCategory.name else post.primary_category,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                     modifier = Modifier.padding(bottom = 2.dp)

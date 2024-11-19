@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
  */
 
 class NewsUseCase(private val newsRepository: NewsRepository) {
-    suspend fun getPostsByCategories(): Flow<NetworkResult<List<Post>>> {
-        return newsRepository.getPostsByCategories()
+    suspend fun getPostsByCategories(categoryId: Int): Flow<NetworkResult<List<Post>>> {
+        return newsRepository.getPostsByCategories(categoryId)
     }
     suspend fun getCategories(): Flow<NetworkResult<List<Category>>> {
         return newsRepository.getCategories()

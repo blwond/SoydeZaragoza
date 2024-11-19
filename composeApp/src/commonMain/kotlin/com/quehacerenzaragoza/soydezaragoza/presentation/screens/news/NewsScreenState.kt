@@ -11,6 +11,6 @@ data class NewsScreenState(
     val trendingPostsState: ObtainDataState<List<Post>> = ObtainDataState.Idle,
     val selectedPostState: ObtainDataState<Post> = ObtainDataState.Idle,
     val commentsState: ObtainDataState<List<Comment>> = ObtainDataState.Idle,
-    val selectedCategory: Category? = null,
+    val selectedCategory: Category = Category(0,-1,"Todas","all"),
     val onCategorySelected: (Category) -> Unit = {}
 )

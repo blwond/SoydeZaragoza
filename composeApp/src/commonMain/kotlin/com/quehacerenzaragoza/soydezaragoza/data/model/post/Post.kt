@@ -9,7 +9,7 @@ data class Post(
     val date: String,
     val id: Int,
     val title: Title,
-    val primary_category: String,
-    val primary_category_id: Int,
+    val primary_category: String = "Sin categoría",
+    val primary_category_id: Int = -1,
     val excerpt: Excerpt
 )

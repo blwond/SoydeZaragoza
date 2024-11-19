@@ -7,7 +7,7 @@ import com.quehacerenzaragoza.soydezaragoza.data.remote.NetworkResult
 
 abstract class NewsRemoteDataSource {
 
-    abstract suspend fun getPostsByCategories(): NetworkResult<List<Post>>
+    abstract suspend fun getPostsByCategories(categoryId: Int): NetworkResult<List<Post>>
 
     abstract suspend fun getCategories(): NetworkResult<List<Category>>
 
