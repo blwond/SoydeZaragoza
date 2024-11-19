@@ -42,7 +42,7 @@ fun PostCard(post: Post, newsState: NewsScreenState) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 24.dp)
+            .padding(top = 8.dp, bottom = 24.dp)
 
     ) {
         Row(

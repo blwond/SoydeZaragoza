@@ -29,7 +29,7 @@ fun ShimmeringPostCardPlaceholder() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 28.dp)
+            .padding(top = 8.dp, bottom = 27.5.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
