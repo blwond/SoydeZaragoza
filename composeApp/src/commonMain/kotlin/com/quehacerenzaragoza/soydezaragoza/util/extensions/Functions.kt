@@ -32,7 +32,7 @@ fun getRelativeTimeFromNow(dateIso: String): String {
         duration.inWholeDays < 7 -> "Hace ${duration.inWholeDays}d"
         else -> {
             val weeks = duration.inWholeDays / 7
-            "Hace ${weeks}sem"
+            "Hace ${weeks} sem"
         }
     }
 }

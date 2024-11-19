@@ -31,7 +31,7 @@ fun NewsTopAppBar() {
                 Text(
                     text = currentDate,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             }
         },
