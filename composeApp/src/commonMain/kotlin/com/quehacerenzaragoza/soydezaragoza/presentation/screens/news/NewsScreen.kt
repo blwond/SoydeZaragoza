@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -92,8 +93,17 @@ object NewsScreen : Screen {
                     text = "Por categorías",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.align(Alignment.CenterVertically)
                 )
+                Spacer(Modifier.weight(1f))
+                Text(
+                    text = "Ver más",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+
             }
 
             Spacer(Modifier.height(16.dp))
@@ -283,14 +293,28 @@ object NewsScreen : Screen {
                 }
             }
             is ObtainDataState.Success -> {
-                val categories = categoriesState.data
+                val allCategory = Category(
+                    count = 0,
+                    id = -1,
+                    name = "Todas",
+                    slug = "all"
+                )
+
+                val allCategories = listOf(allCategory) + categoriesState.data
+
                 LazyRow {
-                    items(categories) { category ->
+                    items(allCategories) { category ->
                         CategoryView(
                             category = category,
-                            isSelected = category == selectedCategory,
+                            isSelected = category == (selectedCategory ?: allCategory),
                             onCategoryClick = onCategorySelected
                         )
+                    }
+                }
+
+                if (selectedCategory == null) {
+                    LaunchedEffect(Unit) {
+                        onCategorySelected(allCategory)
                     }
                 }
             }
