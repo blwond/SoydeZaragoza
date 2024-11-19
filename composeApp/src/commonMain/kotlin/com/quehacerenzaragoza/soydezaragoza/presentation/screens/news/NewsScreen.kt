@@ -88,16 +88,17 @@ object NewsScreen : Screen {
         LazyColumn (
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(horizontal = 20.dp)
         ) {
 
             item {
-                PostsStatefulList(
-                    postsState = newsState.trendingPostsState,
-                    content = { post -> TrendingNew(post = post) },
-                    placeholder = { ShimmeringTrendingNewsPlaceholder() },
-                    placeholderItems = 1
-                )
+                Box(modifier = Modifier.padding(horizontal = 20.dp)){
+                    PostsStatefulList(
+                        postsState = newsState.trendingPostsState,
+                        content = { post -> TrendingNew(post = post) },
+                        placeholder = { ShimmeringTrendingNewsPlaceholder() },
+                        placeholderItems = 1
+                    )
+                }
             }
 
             item {
@@ -106,7 +107,7 @@ object NewsScreen : Screen {
 
             stickyHeader {
                 Column (Modifier.background(MaterialTheme.colorScheme.background)) {
-                    Row {
+                    Row (Modifier.padding(horizontal = 20.dp)) {
                         Text(
                             text = "Por categorías",
                             style = MaterialTheme.typography.titleMedium,
@@ -138,13 +139,15 @@ object NewsScreen : Screen {
             }
 
             item {
-            PostsStatefulList(
-                postsState = newsState.postsState,
-                content = { post -> PostCard(post = post) },
-                placeholder = { ShimmeringPostCardPlaceholder() },
-                placeholderItems = 5
-            )
+                Box(modifier = Modifier.padding(horizontal = 20.dp)) {
+                    PostsStatefulList(
+                        postsState = newsState.postsState,
+                        content = { post -> PostCard(post = post) },
+                        placeholder = { ShimmeringPostCardPlaceholder() },
+                        placeholderItems = 5
+                    )
                 }
+            }
 
         }
     }
@@ -312,6 +315,9 @@ object NewsScreen : Screen {
         when (categoriesState) {
             is ObtainDataState.Loading -> {
                 LazyRow {
+                    item {
+                        Spacer(Modifier.width(20.dp))
+                    }
                     items(placeholderItems) {
                         placeholder()
                     }
@@ -328,6 +334,9 @@ object NewsScreen : Screen {
                 val allCategories = listOf(allCategory) + categoriesState.data
 
                 LazyRow {
+                    item {
+                        Spacer(Modifier.width(20.dp))
+                    }
                     items(allCategories) { category ->
                         CategoryView(
                             category = category,
