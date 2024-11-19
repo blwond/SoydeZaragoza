@@ -1,5 +1,6 @@
 package com.quehacerenzaragoza.soydezaragoza.presentation.screens.news
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -80,6 +82,7 @@ object NewsScreen : Screen {
         })
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     fun NewsScreenContent(newsState: NewsScreenState, paddingValues: PaddingValues){
         LazyColumn (
@@ -101,42 +104,37 @@ object NewsScreen : Screen {
                 Spacer(Modifier.height(24.dp))
             }
 
-            item {
-                Row {
-                    Text(
-                        text = "Por categorías",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.align(Alignment.CenterVertically)
-                    )
-                    Spacer(Modifier.weight(1f))
-                    Text(
-                        text = "Ver más",
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.align(Alignment.CenterVertically)
+            stickyHeader {
+                Column (Modifier.background(MaterialTheme.colorScheme.background)) {
+                    Row {
+                        Text(
+                            text = "Por categorías",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.align(Alignment.CenterVertically)
+                        )
+                        Spacer(Modifier.weight(1f))
+                        Text(
+                            text = "Ver más",
+                            style = MaterialTheme.typography.titleSmall,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.align(Alignment.CenterVertically)
+                        )
+                    }
+
+                    Spacer(Modifier.height(16.dp))
+
+                    CategoriesStatefulList(
+                        categoriesState = newsState.categoriesState,
+                        selectedCategory = newsState.selectedCategory,
+                        onCategorySelected = { category -> newsState.onCategorySelected(category) },
+                        placeholder = { ShimmeringCategoryViewPlaceholder() },
+                        placeholderItems = 10
                     )
 
+                    Spacer(Modifier.height(24.dp))
                 }
-            }
-
-            item {
-                Spacer(Modifier.height(16.dp))
-            }
-
-            item {
-                CategoriesStatefulList(
-                    categoriesState = newsState.categoriesState,
-                    selectedCategory = newsState.selectedCategory,
-                    onCategorySelected = { category -> newsState.onCategorySelected(category) },
-                    placeholder = { ShimmeringCategoryViewPlaceholder() },
-                    placeholderItems = 10
-                )
-            }
-
-            item {
-                Spacer(Modifier.height(24.dp))
             }
 
             item {
