@@ -26,6 +26,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -166,7 +167,7 @@ object NewsScreen : Screen {
                 Text(
                     text = post.primary_category,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                     modifier = Modifier.weight(1f)
                 )
 
@@ -176,7 +177,7 @@ object NewsScreen : Screen {
                     Icon(
                         imageVector = FeatherIcons.Clock,
                         contentDescription = "Clock",
-                        tint = Color.Gray,
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
                         modifier = Modifier.height(14.dp)
                     )
 
@@ -185,7 +186,7 @@ object NewsScreen : Screen {
                     Text(
                         text = getRelativeTimeFromNow(post.date),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
 
                     Spacer(modifier = Modifier.width(8.dp))
@@ -193,7 +194,7 @@ object NewsScreen : Screen {
                     Icon(
                         imageVector = FeatherIcons.Heart,
                         contentDescription = "Heart",
-                        tint = Color.Gray,
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
                         modifier = Modifier.height(14.dp)
                     )
 
@@ -202,7 +203,7 @@ object NewsScreen : Screen {
                     Text(
                         text = "23",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                 }
             }
@@ -222,7 +223,7 @@ object NewsScreen : Screen {
                 .padding(end = 15.dp)
                 .clickable { onCategoryClick(category) }
                 .background(
-                    color = if (isSelected) MaterialTheme.colorScheme.primary else Color.LightGray,
+                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                     shape = RoundedCornerShape(20.dp)
                 )
                 .padding(horizontal = 12.dp, vertical = 8.dp)
@@ -230,7 +231,7 @@ object NewsScreen : Screen {
             Text(
                 text = category.name,
                 style = MaterialTheme.typography.labelLarge,
-                color = if (isSelected) MaterialTheme.colorScheme.onPrimary else Color.DarkGray
+                color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondary
             )
         }
     }

@@ -8,10 +8,10 @@ val OnBlueLight = Color(0xffffffff)
 val BlueContainerLight = Color(0xffd4e8f7)
 val OnBlueContainerLight = Color(0xff001d33)
 
-val BlueSecondaryLight = Color(0xff5a92c2)
-val OnBlueSecondaryLight = OnBlueLight
-val BlueSecondaryContainerLight = Color(0xffdbeaf6)
-val OnBlueSecondaryContainerLight = Color(0xff102436)
+val BlueSecondaryLight = Color(0xfff9f9fb)
+val OnBlueSecondaryLight = Color(0xffa2a6af)
+val BlueSecondaryContainerLight = Color(0xfff9f9fb)
+val OnBlueSecondaryContainerLight = Color(0xff828791)
 
 val BlueTertiaryLight = Color(0xff4a7fa3)
 val OnBlueTertiaryLight = OnBlueLight
@@ -33,7 +33,7 @@ val OnSurfaceVariantLight = Color(0xff39424a)
 val OutlineLight = Color(0xff5d6f84)
 
 // DARK
-val BluePrimaryDark = Color(0xff7ab0e3)
+val BluePrimaryDark = Color(0xfffefefe)
 val OnBlueDark = Color(0xff001d33)
 val BlueContainerDark = Color(0xff00497a)
 val OnBlueContainerDark = Color(0xffd4e8f7)
@@ -54,7 +54,7 @@ val ErrorContainerDark = Color(0xff93000a)
 val OnErrorContainerDark = Color(0xffffdad6)
 
 val BackgroundDark = Color(0xff1a1e23)
-val OnBackgroundDark = Color(0xffe3e8ed)
+val OnBackgroundDark = Color(0xff6aa6de)
 val SurfaceDark = BackgroundDark
 val OnSurfaceDark = OnBackgroundDark
 val SurfaceVariantDark = Color(0xff39424a)

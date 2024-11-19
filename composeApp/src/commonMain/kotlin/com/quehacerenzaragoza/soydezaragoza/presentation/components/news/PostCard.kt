@@ -56,7 +56,7 @@ fun PostCard(post: Post) {
                 Text(
                     text = post.primary_category,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                     modifier = Modifier.padding(bottom = 2.dp)
                 )
 
@@ -76,7 +76,7 @@ fun PostCard(post: Post) {
                     Icon(
                         imageVector = FeatherIcons.Clock,
                         contentDescription = "Clock",
-                        tint = Color.Gray,
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
                         modifier = Modifier.height(14.dp)
                     )
 
@@ -85,7 +85,7 @@ fun PostCard(post: Post) {
                     Text(
                         text = getRelativeTimeFromNow(post.date),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
 
                     Spacer(modifier = Modifier.width(12.dp))
@@ -93,7 +93,7 @@ fun PostCard(post: Post) {
                     Icon(
                         imageVector = FeatherIcons.Heart,
                         contentDescription = "Heart",
-                        tint = Color.Gray,
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
                         modifier = Modifier.height(14.dp)
                     )
 
@@ -102,7 +102,7 @@ fun PostCard(post: Post) {
                     Text(
                         text = "23",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                 }
             }
