@@ -2,6 +2,7 @@ package com.quehacerenzaragoza.soydezaragoza.presentation.screens.news
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,7 +17,9 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -78,53 +82,71 @@ object NewsScreen : Screen {
 
     @Composable
     fun NewsScreenContent(newsState: NewsScreenState, paddingValues: PaddingValues){
-        Column (modifier = Modifier.padding(paddingValues).padding(horizontal = 20.dp)) {
+        LazyColumn (
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(horizontal = 20.dp)
+        ) {
 
-            PostsStatefulList(
-                postsState = newsState.trendingPostsState,
-                content = { post -> TrendingNew(post = post) },
-                placeholder = { ShimmeringTrendingNewsPlaceholder() },
-                placeholderItems = 1
-            )
-
-            Spacer(Modifier.height(24.dp))
-
-            Row {
-                Text(
-                    text = "Por categorías",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.align(Alignment.CenterVertically)
+            item {
+                PostsStatefulList(
+                    postsState = newsState.trendingPostsState,
+                    content = { post -> TrendingNew(post = post) },
+                    placeholder = { ShimmeringTrendingNewsPlaceholder() },
+                    placeholderItems = 1
                 )
-                Spacer(Modifier.weight(1f))
-                Text(
-                    text = "Ver más",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
-
             }
 
-            Spacer(Modifier.height(16.dp))
+            item {
+                Spacer(Modifier.height(24.dp))
+            }
 
-            CategoriesStatefulList(
-                categoriesState = newsState.categoriesState,
-                selectedCategory = newsState.selectedCategory,
-                onCategorySelected = { category -> newsState.onCategorySelected(category) },
-                placeholder = { ShimmeringCategoryViewPlaceholder() },
-                placeholderItems = 10
-            )
+            item {
+                Row {
+                    Text(
+                        text = "Por categorías",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    )
+                    Spacer(Modifier.weight(1f))
+                    Text(
+                        text = "Ver más",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    )
 
-            Spacer(Modifier.height(24.dp))
+                }
+            }
 
+            item {
+                Spacer(Modifier.height(16.dp))
+            }
+
+            item {
+                CategoriesStatefulList(
+                    categoriesState = newsState.categoriesState,
+                    selectedCategory = newsState.selectedCategory,
+                    onCategorySelected = { category -> newsState.onCategorySelected(category) },
+                    placeholder = { ShimmeringCategoryViewPlaceholder() },
+                    placeholderItems = 10
+                )
+            }
+
+            item {
+                Spacer(Modifier.height(24.dp))
+            }
+
+            item {
             PostsStatefulList(
                 postsState = newsState.postsState,
                 content = { post -> PostCard(post = post) },
                 placeholder = { ShimmeringPostCardPlaceholder() },
                 placeholderItems = 5
             )
+                }
 
         }
     }
@@ -228,11 +250,15 @@ object NewsScreen : Screen {
         isSelected: Boolean,
         onCategoryClick: (Category) -> Unit
     ) {
+        val interactionSource = remember { MutableInteractionSource() }
         Row(
             modifier = Modifier
                 .wrapContentWidth()
                 .padding(end = 15.dp)
-                .clickable { onCategoryClick(category) }
+                .clickable (
+                    interactionSource = interactionSource,
+                    indication = null
+                ){ onCategoryClick(category) }
                 .background(
                     color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                     shape = RoundedCornerShape(20.dp)
@@ -256,16 +282,16 @@ object NewsScreen : Screen {
     ) {
         when (postsState) {
             is ObtainDataState.Loading -> {
-                LazyColumn {
-                    items(placeholderItems) {
+                Column {
+                    repeat(placeholderItems) {
                         placeholder()
                     }
                 }
             }
             is ObtainDataState.Success -> {
                 val posts = postsState.data
-                LazyColumn {
-                    items(posts) { post ->
+                Column {
+                    posts.forEach { post ->
                         content(post)
                     }
                 }
