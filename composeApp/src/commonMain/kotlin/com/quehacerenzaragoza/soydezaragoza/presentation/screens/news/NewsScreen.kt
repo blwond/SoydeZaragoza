@@ -102,7 +102,7 @@ object NewsScreen : Screen {
             }
 
             stickyHeader {
-                Box(modifier = Modifier.height(24.dp).fillMaxWidth().background(MaterialTheme.colorScheme.background))
+                Spacer(modifier = Modifier.height(24.dp).fillMaxWidth().background(MaterialTheme.colorScheme.background))
 
                 Column (Modifier.background(MaterialTheme.colorScheme.background)) {
                     Row (Modifier.padding(horizontal = 20.dp)) {
