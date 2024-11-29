@@ -24,8 +24,10 @@ kotlinxSerialization = "1.7.3"
 voyagerVersion = "1.0.0"
 coil3-ktor = "3.0.0-alpha08"
 coil3 = "3.0.0"
+webkit = "1.12.1"
 
 [libraries]
+androidx-webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
 compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "composeShimmer" }
 feather = { module = "br.com.devsrsouza.compose.icons:feather", version.ref = "feather" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

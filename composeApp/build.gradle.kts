@@ -56,21 +56,29 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.encoding)
             implementation(libs.ktor.client.auth)
+
             //koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+
             //voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
+
             //coil
             implementation(libs.coil.compose.core)
             implementation(libs.coil.compose)
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
+
             //Shimmer
             implementation(libs.compose.shimmer)
+
             //Icons
             implementation(libs.feather)
+
+            //WebView
+            implementation(libs.androidx.webkit)
 
 
             implementation(libs.kotlinx.datetime)
